@@ -13,6 +13,7 @@ import {
   AuthCredentialsValidator,
   TAuthCredentialsValidator,
 } from "@/lib/validators/account-credentials-validator";
+import { trpc } from "@/trpc/client";
 
 function Page() {
   const {
@@ -22,6 +23,9 @@ function Page() {
   } = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(AuthCredentialsValidator),
   });
+
+  const { data } = trpc.useQuery();
+  console.log(data);
 
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
     //send data to server

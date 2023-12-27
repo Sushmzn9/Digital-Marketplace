@@ -1,10 +1,9 @@
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import { publicProcedure, router } from "./trpc";
+import { authRouter } from "./authRouter";
 
-const appRouter = router({
-  anyApiRoute: publicProcedure.query(() => {
-    return "hello";
-  }),
+export const appRouter = router({
+  auth: authRouter,
 });
 
 export type AppRouter = typeof appRouter;
